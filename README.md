@@ -9,3 +9,7 @@ with node_modules package existing (after installing the puppeteer-chromium pack
 1. cd scrape
 2. edit pageScraper.js to your preferred collection link to scrape, and choose a particular nft variant as shown in the file
 3. npm run start
+
+Reference
+
+https://icpverse.medium.com/introducing-infinity-rank-for-nfts-39cde80e90d4
