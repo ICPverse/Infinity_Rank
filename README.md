@@ -11,5 +11,4 @@ with node_modules package existing (after installing the puppeteer-chromium pack
 3. npm run start
 
 Reference
-
 https://icpverse.medium.com/introducing-infinity-rank-for-nfts-39cde80e90d4
