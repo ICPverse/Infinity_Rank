@@ -8,6 +8,7 @@ const scraperObject = {
 		console.log('Lots of data. This can and should take a while. Grab a coffee or something..')
 		await page.goto(this.url,{
 			waitUntil: 'networkidle0',
+			timeout: 0,
 		  });;
 		
 		let xyz = await page.evaluate(() => {
@@ -56,7 +57,8 @@ const scraperObject = {
 			return results;
 		});
 
-		
+		//Choosing a value of factor for Weighted Infinity Rank:
+		let w_factor = 1;
 		let k = 1;
 		let count = 0;
 		let weights = [];
@@ -71,7 +73,7 @@ const scraperObject = {
 				ind.push(k);
 			}
 			else 
-				weight += parseInt(res[1]);
+				weight += Math.pow(parseInt(res[1]),w_factor);
 			k += 1;
 		}
 		weights.push(weight);
@@ -103,7 +105,7 @@ const scraperObject = {
 			while (n < varList.length){
 				let rslt = xyz[varList[n]].split('<<<>>>');
 				combinationName = combinationName.concat('++',rslt[0]);
-				rarityScore = rarityScore + (parseInt(rslt[1])/weights[n]);
+				rarityScore = rarityScore + (Math.pow(parseInt(rslt[1]), w_factor)/weights[n]);
 				n += 1;
 			}
 			if (rarityScore < winningRar){
@@ -129,7 +131,7 @@ const scraperObject = {
 			while (i < xyz.length){
 				let r = xyz[i].split('<<<>>>');
 				if (r[0] === nVariations[n]){
-					irankExtrapolated = irankExtrapolated + (parseInt(r[1])/weights[n-1]);
+					irankExtrapolated = irankExtrapolated + (Math.pow(parseInt(r[1]),w_factor)/weights[n-1]);
 					break;
 				}
 				else 
@@ -147,7 +149,7 @@ const scraperObject = {
 				irank += 1;
 			n += 1
 		}
-		irank = Math.floor((weights[1]-1)*(irank-1)/(rarityList.length-1));
+		irank = Math.floor(Math.pow(weights[1]-1, 1/w_factor)*(irank-1)/(rarityList.length-1));
 
 		console.log("The Infinity Rank of the Selected Item is:")
 
