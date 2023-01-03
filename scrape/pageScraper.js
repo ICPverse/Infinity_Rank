@@ -59,6 +59,10 @@ const scraperObject = {
 
 		//Choosing a value of factor for Weighted Infinity Rank:
 		let w_factor = 1;
+		let w2_factor = 0;
+		let w3_factor = 0;
+		let w4_factor = 0;
+		let wlog_factor = 0;
 		let k = 1;
 		let count = 0;
 		let weights = [];
