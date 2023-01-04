@@ -78,6 +78,8 @@ const scraperObject = {
 			}
 			else 
 				weight += Math.pow(parseInt(res[1]),w_factor);
+			//the complete weight could be:
+			//      weight += Math.pow(parseInt(res[1]),w_factor) + Math.pow(parseInt(res[1]),w2_factor) + Math.pow(parseInt(res[1]),w3_factor) Math.pow(parseInt(res[1]),w4_factor) + wlog_factor*Math.log(parseInt(res[1]));
 			k += 1;
 		}
 		weights.push(weight);
@@ -154,7 +156,10 @@ const scraperObject = {
 			n += 1
 		}
 		irank = Math.floor(Math.pow(weights[1]-1, 1/w_factor)*(irank-1)/(rarityList.length-1));
-
+		//the complete decoder is written as:
+		//irank = Math.floor((Math.pow(weights[1]-1, 1/w_factor) + Math.pow(weights[1]-1, 1/w2_factor) + Math.pow(weights[1]-1, 1/w3_factor) + Math.pow(weights[1]-1, 1/w4_factor)) * (irank-1)/(rarityList.length-1));  
+		//log portion is ignored because of O(n^k + log(n)) considerations. 
+				
 		console.log("The Infinity Rank of the Selected Item is:")
 
 		console.log(irank);
